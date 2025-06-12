@@ -1,0 +1,133 @@
+import productModel from "../models/productModel.js";
+import brandModel from "../models/brandModel.js";
+import categoryModel from "../models/categoryModel.js";
+import cloudinary from "../configs/cloudinaryConfig.js"
+import multer from 'multer';
+
+const upload = multer({ dest: 'uploads/' }).single('image');
+
+//LIST ALL PRODUCTS or LIST BASED ON SEACHED VALUES
+const list = async (req, res) => {
+    const search = req.query.search?.toLowerCase();
+    try {
+            let pipeline = [
+                // Join with brand collection
+                {
+                    $lookup: {
+                        from: 'brands',
+                        localField: 'brand',
+                        foreignField: '_id',
+                        as: 'brand'
+                    }
+                },
+                { $unwind: "$brand" },
+
+                // Join with category collection
+                {
+                    $lookup: {
+                        from: 'categories',
+                        localField: 'category',
+                        foreignField: '_id',
+                        as: 'category'
+                    }
+                },
+                { $unwind: "$category" },
+            ];
+
+            // If search query exists, add match stage
+            if (search) {
+                pipeline.push({
+                    $match: {
+                        $or: [
+                            { name: { $regex: search, $options: "i" } },
+                            { "brand.name": { $regex: search, $options: "i" } },
+                            { "category.name": { $regex: search, $options: "i" } },
+                            { price: !isNaN(search) ? Number(search) : -999999 },
+                            { engineDisplacement: !isNaN(search) ? Number(search) : -999999 }
+                        ]
+                    }
+                });
+            }
+
+        const products = await productModel.aggregate(pipeline);
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+//ADD PRODUCT
+const create = async (req, res) => {
+    try {
+        const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'products'
+        });
+        const newProduct = new productModel({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            category: req.body.category,
+            brand: req.body.brand,
+            engineDisplacement: req.body.engineDisplacement,
+            image: { url: result.secure_url }
+        });
+        // const newProduct = new productModel(req.body);
+        await newProduct.save();
+        res.status(201).json(newProduct);
+    } catch (err) {
+         res.status(400).json({ error: err.message });
+    }
+};
+
+//VIEW 1 PRODDUCT BY ID
+const read = async (req, res) => {
+    try {
+        const product = await productModel.findById(req.params.id).populate('brand', 'name').populate('category', 'name');
+        if (!product) return res.status(404).json({ error: "Product not found"});
+        res.json(product)
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
+// const update = (req, res) => {
+//   const id = parseInt(req.params.id);
+//   const productIndex = records.products.findIndex(
+//     (record) => parseInt(record.id) === id
+//   );
+
+//   if (productIndex === -1) {
+//     res.status(404).json({ error: "Product not found!" });
+//     return;
+//   }
+
+//   records.products[productIndex] = { ...req.body, id: id };
+//   res.json(records.products[productIndex]);
+// }
+
+//EDIT EXISTING PRODUCT
+const patch = async (req, res) => {
+    try {
+        const patched = await productModel.findOneAndUpdate( {_id: req.params.id}, req.body, {
+            new: true,
+        });
+        if (!patched) return res.status(404).json({ error: "Product not found"});
+        res.json(patched);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+
+}
+
+//DELETE PRODUCT
+const deleteProduct = async (req, res) => {
+    try {
+        const deleted = await productModel.findByIdAndDelete(req.params.id);
+        if (!deleted) return res.status(404).json({ error: "Product not found"});
+        res.json({ message: "Product deleted successfully" });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
+export { list, create, read, patch, deleteProduct };
