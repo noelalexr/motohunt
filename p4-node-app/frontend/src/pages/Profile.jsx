@@ -3,115 +3,165 @@ import LoaderPage from "./LoaderPage";
 import { useNavigate, Link } from "react-router";
 
 function Profile() {
-  const navigate = useNavigate()
-  const [record, setRecord] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [wishlist, setWishlist] = useState([]);
+    const navigate = useNavigate()
+    const [record, setRecord] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [products, setProducts] = useState([]);
+    const [user, setUser] = useState(null);
 
-  const handlePhotoClick = () => {
-    navigate("/profile/upload-photo");
-  };
+    const handlePhotoClick = () => {
+        navigate("/profile/upload-photo");
+    };
 
-  useEffect(() => {
-  const fetchData = async () => {
-    try {
-      //FETCH PROFILE DATA
-      const profileResponse = await fetch("http://localhost:3000/api/profile", {
-        method: "GET",
-        credentials: "include",
-      });
-      const profileData = await profileResponse.json();
-      setRecord(profileData);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                //FETCH PROFILE DATA
+                const profileResponse = await fetch("http://localhost:3000/api/profile", {
+                    method: "GET",
+                    credentials: "include",
+                });
+                const profileData = await profileResponse.json();
+                setRecord(profileData);
+                const resProducts = await fetch(`http://localhost:3000/api/products/user/${profileData._id}`, {
+                    method: "GET",
+                    credentials: "include",
+                });
+                const productsData = await resProducts.json();
+                setProducts(productsData);
+                console.log("Products Data:", productsData);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-      //FETCH WISHLIST DATYA
-      const wishlistResponse = await fetch("http://localhost:3000/api/wishlist", {
-        credentials: "include",
-      });
-      const wishlistData = await wishlistResponse.json();
-      setWishlist(wishlistData);
-      // const wishlistIds = wishlistData.map(item => item._id);
-      // setWishlist(wishlistIds);
+        fetchData();
+    }, []);
 
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setError(error.message);
-    } finally {
-      setLoading(false);
+    const handleDelete = async (productId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+        if (!confirmDelete) return;
+
+        try {
+            await fetch(`http://localhost:3000/api/products/${productId}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+
+            // Remove the product from local state after deletion
+            setProducts(products.filter((product) => product._id !== productId));
+        } catch (err) {
+            console.error(err);
+            alert("Failed to delete product.");
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            await fetch("http://localhost:3000/api/auth/logout", {
+                method: "POST",
+                credentials: "include",
+            });
+
+            navigate("/login");
+        } catch (err) {
+            console.error("Logout failed:", err);
+        }
+    };
+
+    if (loading) {
+        return <LoaderPage />;
     }
-  };
 
-  fetchData();
-}, []);
+    // console.log(record)
 
-  if (loading) {
-    return <LoaderPage />;
-  }
-
-  //REMOVE FROM WISHLIST
-  const removeFromWishlist = async (productId) => {
-  try {
-    await fetch("http://localhost:3000/api/wishlist/remove", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ productId }),
-    });
-
-    setWishlist(prev => prev.filter(product => product._id !== productId));
-  } catch (err) {
-    console.error("Failed to remove from wishlist:", err);
-  }
-};
-
-  // console.log(record)
-
-  return (
-    <div>
-      <h2>Profile</h2>
-        <div>
-          <img
-            src={record.photo.url.replace("/upload/", "/upload/c_fill,w_200,h_200/")}
-            alt="Profile"
-            onClick={handlePhotoClick}
-            style={{ width: "200px", height: "200px", borderRadius: "50%", cursor: "pointer" }}
-          />
-          <h3>User Details:</h3>
-          {/* <p><strong>ID:</strong> {record._id}</p> */}
-          <p><strong>Name:</strong> {record.name}</p>
-          <p><strong>Email:</strong> {record.email}</p>
-        </div>
-
-        <button onClick={() => navigate("/add-product")}>Add product</button>
-
-        {wishlist.length === 0 ? (
-        <p>No products in your wishlist.</p>
-      ) : (
-        wishlist.map((product) => (
-          <Link to={`/products/${product._id}`} key={product._id}>
-            <div>
-              <img 
-                src={product.image.url.replace("/upload/", "/upload/c_fill,w_200,h_112/")} 
-                alt={product.name} 
-                style={{ width: "200px", height: "112px", objectFit: "cover" }}
-              />
-              <h3>{product.name}</h3>
-              <p>{product.price}</p>
-
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  removeFromWishlist(product._id);
-                }}
-              >
-                Remove from Wishlist
-              </button>
+    return (
+        <div className="bg-white/10 md:p-10">
+            <div className="md:w-150 mx-auto">
+                <div className="bg-[#990000b4] px-30 pt-15 pb-35 md:rounded-t-lg">
+                    <img src="/images/logo/logo-white.png" alt="" />
+                </div>
+                <div className="relative group">
+                    <img
+                        src={record.photo.url.replace("/upload/", "/upload/c_fill,w_200,h_200/")}
+                        alt="Profile"
+                        onClick={handlePhotoClick}
+                        className="absolute left-1/2 -translate-x-1/2 md:top-[-120px] top-[-105px] w-[200px] h-[200px] rounded-full cursor-pointer z-1"
+                    />
+                    <p className="absolute text-white bg-gray-500/90 py-1 px-2 rounded-sm text-xs left-1/2 -translate-x-1/2 md:top-[39px] top-[60px] opacity-0 group-hover:opacity-100 z-2 cursor-pointer transition-all ease-in-out duration-300">Change profile picture</p>
+                </div>
+                <div className="relative bg-white md:rounded-b-lg pb-10">
+                    <div onClick={() => navigate("/dashboard")} className="absolute top-3 left-3 rounded-full text-[#990000] p-3 hover:bg-gray-300 ease-in-out duration-300 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                        </svg>
+                    </div>
+                    <p className="md:pt-30 pt-35 text-4xl font-bold text-center">{record.name}</p>
+                    <p className="text-center">{record.email}</p>
+                    <button onClick={handleLogout} className="text-sm border-2 border-[#990000] mt-8 py-2 px-4 block w-30 rounded-full text-[#990000] mx-auto hover:bg-[#990000] hover:text-white transition-colors duration-300 cursor-pointer">Logout</button>
+                </div>
             </div>
-          </Link>
-        ))
-      )}
-    </div>
-  );
+
+            <div className="flex justify-center gap-5 py-10 border-b-2 border-[#990000] md:mx-[3vw] mx-3">
+                <div onClick={() => navigate("/add-product")} className="flex gap-2 bg-[#990000] text-white py-3 px-5 rounded-full cursor-pointer hover:scale-105 ease-in-out duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <button className="cursor-pointer">Post Motorcycle</button>
+                </div>
+                <div onClick={() => navigate("/wishlist")} className="flex gap-2 bg-[#990000] text-white py-3 px-5 rounded-full cursor-pointer hover:scale-105 ease-in-out duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                    <button className="cursor-pointer">My Wishlist</button>
+                </div>
+            </div>
+
+            <h1 className="text-white text-center text-3xl pt-8 pb-6 font-semibold">Posted Motorcycles</h1>
+            {products.length === 0 ? (
+                <p className="text-center text-gray-300 text-lg p-10">You haven't posted any motorcycles yet.</p>
+            ) : (
+                <div className="flex flex-wrap justify-center">
+                    {products.map(product => (
+                        <div className="group flex justify-between bg-white rounded-xl md:m-5 m-3">
+                            <Link to={`/products/${product._id}`} key={product._id}>
+                                <div key={product._id}>
+                                    <div className="flex justify-center">
+                                        <div className="overflow-hidden rounded-l-lg">
+                                            <img
+                                                src={product.image.url.replace("/upload/", "/upload/c_fill,w_200,h_200/")}
+                                                alt={product.name}
+                                                className="md:w-40 w-30 h-40 object-cover rounded-l-lg group-hover:scale-110 ease-in-out duration-300"
+                                            />
+                                        </div>
+                                        <div className="mx-5 my-auto md:w-50 w-30">
+                                            <h3 className="md:text-lg text-sm font-semibold pb-2 group-hover:text-[#990000] transition-colors duration-300">{product.name}</h3>
+                                            <div className="text-xs group-hover:text-[#990000] transition-colors duration-300">
+                                                <p>{product.price}</p>
+                                                <p>{product.brand.name}</p>
+                                                <p>{product.category.name}</p>
+                                                <p>{product.engineDisplacement}cc</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                            <div className="flex flex-col justify-center rounded-r-lg py-3 px-5 gap-3 bg-gray-50">
+                                <button onClick={() => navigate(`/edit-product/${product._id}`)} className="text-sm text-white bg-blue-500 px-3 h-9 rounded-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer">Edit</button>
+                                <button onClick={() => handleDelete(product._id)} className="text-sm text-white bg-red-500 px-3 h-9 rounded-lg hover:bg-red-700 transition-colors duration-300 cursor-pointer">Delete</button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+
+        </div>
+    );
 };
 
 export default Profile;

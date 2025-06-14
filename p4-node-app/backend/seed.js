@@ -8,112 +8,178 @@ dotEnv.config();
 const brands = [
     {
         name: "Honda",
-        description: "Renowned Japanese manufacturer famous for reliable motorcycles and innovative engineering."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823225/honda-logo_waksqy.png"
+        }
     },
     {
         name: "Yamaha",
-        description: "Japanese brand known for versatile motorcycles, ranging from sportbikes to cruisers."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823226/yamaha-logo_emwtme.webp"
+        }
     },
     {
         name: "Suzuki",
-        description: "Japanese maker with a strong lineup of performance and commuter motorcycles."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823224/suzuki-logo_k5x42w.png"
+        }
     },
     {
         name: "KTM",
-        description: "Austrian company famous for high-performance off-road and racing motorcycles."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823224/ktm-logo_ybtiet.png"
+        }
     },
     {
         name: "CFMOTO",
-        description: "Chinese brand offering affordable, stylish, and feature-rich motorcycles and ATVs."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823224/cfmoto-logo_uoc5wb.jpg"
+        }
     },
     {
         name: "Kawasaki",
-        description: "Japanese manufacturer known for powerful sport and cruiser motorcycles."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823225/kawasaki-logo_zsy8cp.png"
+        }
     },
     {
         name: "Bristol",
-        description: "British manufacturer focusing on classic and custom motorcycles."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823225/bristol-logo_sqzyf2.jpg"
+        }
     },
     {
         name: "Harley-Davidson",
-        description: "Iconic American brand famous for heavyweight cruisers and a strong biker culture."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823224/harley-davidson-logo_cyhlxm.jpg"
+        }
     },
     {
         name: "BMW",
-        description: "German maker blending luxury, performance, and advanced technology in motorcycles."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823227/bmw-logo_vrlpsb.png"
+        }
     },
     {
         name: "Ducati",
-        description: "Italian brand celebrated for sporty, high-performance motorcycles with racing heritage."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823227/ducati-logo_ytjdlc.png"
+        }
     },
     {
         name: "Vespa",
-        description: "an iconic Italian brand known for its stylish, lightweight scooters, combining vintage design with modern performance."
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823226/vespa-logo_b8b5r8.png"
+        }
+    },
+    {
+        name: "Triumph",
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749905190/triumph-logo_obnlbi.png"
+        }
     },
     {
         name: "Others",
-        description: "Others"
+        logo: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749823736/others-logo_uytki2.png"
+        }
     }
 ];
 
 const categories = [
     {
         name: "Scooter",
-        description: "Compact and fuel-efficient bikes perfect for city commuting and short trips."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873291/scooter_h8jcp6.png"
+        }
     },
     {
-        name: "Sports Bike",
-        description: "High-performance motorcycles designed for speed and agility on the road."
+        name: "Sport",
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873290/sports-bike_givknk.jpg"
+        }
     },
     {
         name: "Cruiser",
-        description: "Comfortable bikes with a laid-back riding style, ideal for long-distance rides."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873291/cruiser_mhhm2m.png"
+        }
     },
     {
         name: "Underbone",
-        description: "Lightweight motorcycles with a step-through frame, widely used for everyday transport."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873291/underbone_dofyt3.png"
+        }
     },
     {
-        name: "Dual-Sport",
-        description: "Versatile bikes built for both on-road and off-road adventures."
+        name: "Dual Sport",
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873291/dual-sport_qf3rbk.jpg"
+        }
     },
     {
         name: "Touring",
-        description: "Motorcycles designed for long journeys, equipped with features for rider comfort."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873291/touring_d909ri.jpg"
+        }
     },
     {
         name: "Chopper",
-        description: "Customized cruisers with extended forks and unique styling."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873292/chopper_rth2df.jpg"
+        }
     },
     {
         name: "Adventure",
-        description: "Robust motorcycles designed for long-distance off-road and on-road travel."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873292/adventure_sxjtte.jpg"
+        }
     },
     {
-        name: "Dirt Bike",
-        description: "Lightweight motorcycles built specifically for off-road trails and motocross."
+        name: "Dirt",
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873291/dirt-bike_cuicbw.jpg"
+        }
     },
     {
-        name: "Electric Bike",
-        description: "Eco-friendly motorcycles powered by electric motors, ideal for urban commuting."
+        name: "Electric",
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873290/electric-bike_roxpvs.jpg"
+        }
     },
     {
         name: "Naked",
-        description: "Versatile motorcycles with an upright riding position, suitable for beginners and daily use."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873293/naked_rolyzu.png"
+        }
     },
     {
         name: "Moped",
-        description: "Small, low-powered bikes perfect for short-distance and economical travel."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873290/moped_aangwl.jpg"
+        }
     },
     {
         name: "Cafe Racer",
-        description: "Retro-styled motorcycles emphasizing speed and handling, inspired by 1960s British bike culture."
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873293/cafe-racer_cv8eeb.jpg"
+        }
+    },
+    {
+        name: "Maxi Scooter",
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873292/maxi-scooter_t74y6f.jpg"
+        }
     },
     {
         name: "Others",
-        description: "Others"
+        image: {
+            url: "https://res.cloudinary.com/dty5cnb6e/image/upload/v1749873406/others-logo_oaeuqv.png"
+        }
     }
 ];
+
+
 
 async function seed() {
     try {
@@ -146,7 +212,7 @@ async function seed() {
         console.error("Error seeding:", error);
         mongoose.disconnect();
         process.exit(1);
-  }
+    }
 }
 
 seed();

@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #d9f5ff inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #d9f5ff inset !important;
+  -webkit-text-fill-color: #000 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+html {
+    background-image: url('/images/backgrounds/bg1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-size:15px;
+}
