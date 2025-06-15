@@ -33,13 +33,13 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const profileResponse = await fetch("http://localhost:3000/api/profile", {
+                const profileResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
                     method: "GET",
                     credentials: "include",
                 });
                 const profileData = await profileResponse.json();
                 setUser(profileData);
-                const response = await fetch("http://localhost:3000/api/dashboard", {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard`, {
                     method: "GET",
                     credentials: "include",
                 });

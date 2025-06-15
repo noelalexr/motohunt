@@ -20,7 +20,7 @@ const GuestDashboard = () => {
     useEffect(() => {
         const fetchPublicProducts = async () => {
             try {
-                const response = await fetch("http://localhost:3000/api/guest-dashboard");
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/guest-dashboard`);
                 const data = await response.json();
                 setProducts(data);
                 setFiltered(data);

@@ -18,13 +18,13 @@ function Profile() {
         const fetchData = async () => {
             try {
                 //FETCH PROFILE DATA
-                const profileResponse = await fetch("http://localhost:3000/api/profile", {
+                const profileResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
                     method: "GET",
                     credentials: "include",
                 });
                 const profileData = await profileResponse.json();
                 setRecord(profileData);
-                const resProducts = await fetch(`http://localhost:3000/api/products/user/${profileData._id}`, {
+                const resProducts = await fetch(`${import.meta.env.VITE_API_URL}/api/products/user/${profileData._id}`, {
                     method: "GET",
                     credentials: "include",
                 });
@@ -47,7 +47,7 @@ function Profile() {
         if (!confirmDelete) return;
 
         try {
-            await fetch(`http://localhost:3000/api/products/${productId}`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/products/${productId}`, {
                 method: "DELETE",
                 credentials: "include",
             });
@@ -62,7 +62,7 @@ function Profile() {
 
     const handleLogout = async () => {
         try {
-            await fetch("http://localhost:3000/api/auth/logout", {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
                 method: "POST",
                 credentials: "include",
             });

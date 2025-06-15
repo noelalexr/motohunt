@@ -9,7 +9,7 @@ function UploadProfilePhoto() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const profileResponse = await fetch("http://localhost:3000/api/profile", {
+                const profileResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
                     method: "GET",
                     credentials: "include",
                 });
@@ -29,7 +29,7 @@ function UploadProfilePhoto() {
         const formData = new FormData();
         formData.append("photo", file);
 
-        const res = await fetch("http://localhost:3000/api/profile/photo", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/profile/photo`, {
             method: "PUT",
             credentials: "include",
             body: formData,

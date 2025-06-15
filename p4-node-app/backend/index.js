@@ -19,6 +19,11 @@ dotEnv.config();
 const port = process.env.port || 3000;
 const app = express();
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://motohunt-4wzp.onrender.com"
+];
+
 //DB CONNECTION
 connectDB();
 
@@ -27,7 +32,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
 }));
 

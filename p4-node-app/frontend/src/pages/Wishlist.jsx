@@ -12,7 +12,7 @@ function Wishlist() {
         const fetchData = async () => {
             try {
                 //FETCH WISHLIST DATYA
-                const wishlistResponse = await fetch("http://localhost:3000/api/wishlist", {
+                const wishlistResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist`, {
                     credentials: "include",
                 });
                 const wishlistData = await wishlistResponse.json();
@@ -38,7 +38,7 @@ function Wishlist() {
     //REMOVE FROM WISHLIST
     const removeFromWishlist = async (productId) => {
         try {
-            await fetch("http://localhost:3000/api/wishlist/remove", {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist/remove`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

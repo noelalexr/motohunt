@@ -19,15 +19,15 @@ function EditProduct() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resProduct = await fetch(`http://localhost:3000/api/products/${id}`, {
+                const resProduct = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
                     method: "GET",
                     credentials: "include",
                 });
-                const resBrands = await fetch("http://localhost:3000/api/brands", {
+                const resBrands = await fetch(`${import.meta.env.VITE_API_URL}/api/brands`, {
                     method: "GET",
                     credentials: "include",
                 });
-                const resCategories = await fetch("http://localhost:3000/api/categories", {
+                const resCategories = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`, {
                     method: "GET",
                     credentials: "include",
                 });
@@ -70,7 +70,7 @@ function EditProduct() {
         }
 
         try {
-            const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
                 method: "PATCH",
                 credentials: "include",
                 body: formData,

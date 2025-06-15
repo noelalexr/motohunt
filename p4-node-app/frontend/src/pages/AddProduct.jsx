@@ -16,15 +16,15 @@ function AddProduct() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const resBrands = await fetch("http://localhost:3000/api/brands", {
+            const resBrands = await fetch(`${import.meta.env.VITE_API_URL}/api/brands`, {
                 method: "GET",
                 credentials: "include",
             });
-            const resCategories = await fetch("http://localhost:3000/api/categories", {
+            const resCategories = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`, {
                 method: "GET",
                 credentials: "include",
             });
-            const resUser = await fetch("http://localhost:3000/api/profile", {
+            const resUser = await fetch(`${import.meta.env.VITE_API_URL}/api/profile"`, {
                 method: "GET",
                 credentials: "include",
             });
@@ -58,7 +58,7 @@ function AddProduct() {
         formData.append("image", image);
 
         try {
-            const res = await fetch("http://localhost:3000/api/products", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
                 method: "POST",
                 credentials: "include",
                 body: formData,

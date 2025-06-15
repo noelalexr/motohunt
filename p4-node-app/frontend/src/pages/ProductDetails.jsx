@@ -21,7 +21,7 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
                     method: "GET",
                     credentials: "include",
                 });
@@ -29,7 +29,7 @@ const ProductDetails = () => {
                 setProductsDetails(data);
 
                 //FETCH WISHLIST
-                const wishlistResponse = await fetch("http://localhost:3000/api/wishlist", {
+                const wishlistResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist`, {
                     credentials: "include",
                 });
                 const wishlistData = await wishlistResponse.json();
@@ -56,7 +56,7 @@ const ProductDetails = () => {
 
     const addToWishlist = async (productId) => {
         try {
-            await fetch("http://localhost:3000/api/wishlist/add", {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist/add`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
@@ -71,7 +71,7 @@ const ProductDetails = () => {
 
     const removeFromWishlist = async (productId) => {
         try {
-            await fetch("http://localhost:3000/api/wishlist/remove", {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist/remove`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
