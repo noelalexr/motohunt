@@ -78,7 +78,7 @@ const Login = () => {
                     <p className="text-sm">Sign up or continue as a Guest User and explore the world of motorcycles!</p>
                     <a href="/register" className="bg-white text-black py-2 px-5 rounded-full mt-8 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Sign Up</a>
                     <p className="mt-1 text-sm">or</p>
-                    <a href="/guest-dashboard" className="bg-white text-black py-2 px-5 rounded-full mt-1 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Continue at Guest User</a>
+                    <a href="/guest-dashboard" className="bg-white text-black py-2 px-5 rounded-full mt-1 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Continue as Guest User</a>
                     <p className="absolute bottom-3 right-4 text-[9px] text-white/70">Developed by <b>Alexander Noel</b></p>
                 </div>
             </div>
