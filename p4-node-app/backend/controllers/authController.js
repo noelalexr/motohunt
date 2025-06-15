@@ -10,7 +10,7 @@ dotEnv.config();
 
 const register = async (req, res) => {
     const payload = req.body;
-    
+
     try {
         const hashedPassword = await bcrypt.hash(payload.password, 10);
 
@@ -57,9 +57,9 @@ const register = async (req, res) => {
             `
         )
 
-        res.status(201).json({message: "Registered Successfully"});
-    } catch(error) {
-        res.status(500).json({error: error.message});
+        res.status(201).json({ message: "Registered Successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -68,46 +68,46 @@ const login = async (req, res) => {
 
 
     try {
-        const user = await userModel.findOne({email: payload.email});
+        const user = await userModel.findOne({ email: payload.email });
 
-        if (!user) return res.status(400).json({error: "Invalid Credentials"});
+        if (!user) return res.status(400).json({ error: "Invalid Credentials" });
 
         const passwordMatched = await bcrypt.compare(payload.password, user.password);
         if (!passwordMatched)
-            return res.status(400).json({error: "Invalid Credentials"});
+            return res.status(400).json({ error: "Invalid Credentials" });
 
         //GENERATE TOKEN
         const token = jwt.sign(
-            {userId: user._id, name: user.name}, 
-            process.env.JWT_SECRET, 
-            {expiresIn: "1h"}
+            { userId: user._id, name: user.name },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
         );
 
         res.cookie("token", token, {
             httpOnly: true,
             secure: true,
-            sameSite: "strict",
+            sameSite: "none",
             maxAge: 36000000,
         });
 
-        res.json({message: "Login Successfully!", token: token});
-    } catch(error) {
-        res.status(500).json({error: error.message});
+        res.json({ message: "Login Successfully!", token: token });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 }
 
 const logout = async (req, res) => {
-  try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict", // match your login settings
-    });
+    try {
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict", // match your login settings
+        });
 
-    res.json({ message: "Logout Successfully!" });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to logout" });
-  }
+        res.json({ message: "Logout Successfully!" });
+    } catch (error) {
+        res.status(500).json({ error: "Failed to logout" });
+    }
 };
 
 export { register, login, logout };
