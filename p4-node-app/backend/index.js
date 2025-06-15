@@ -3,9 +3,9 @@ import dotEnv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
-
 import connectDB from "./configs/db.js";
 
+//ROUTES
 import authRoute from "./routes/authRoute.js";
 import dashboardRoute from "./routes/dashboardRoute.js"
 import guestDashboardRoute from "./routes/guestDashboardRoute.js"
@@ -21,7 +21,7 @@ const app = express();
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://motohunt-4wzp.onrender.com"
+    "https://motohunt-4wzp.onrender.com" //RENDER FRONT END LIVE SITE
 ];
 
 //DB CONNECTION
@@ -41,10 +41,10 @@ app.use("/api/auth", authRoute);
 app.use("/api/guest-dashboard", guestDashboardRoute);
 app.use("/api/dashboard", dashboardRoute);
 app.use("/api/products", productRoute);
-app.use('/api/profile', profileRoute);
-app.use('/api/brands', brandRoute);
-app.use('/api/categories', categoryRoute);
-app.use('/api/wishlist', wishlistRoute);
+app.use("/api/profile", profileRoute);
+app.use("/api/brands", brandRoute);
+app.use("/api/categories", categoryRoute);
+app.use("/api/wishlist", wishlistRoute);
 
 //START SERVER
 app.listen(port, () => {

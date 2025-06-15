@@ -22,9 +22,9 @@ const Dashboard = () => {
     const [isCategoryOverflowing, setIsCategoryOverflowing] = useState(false);
 
     const formatPeso = (price) => {
-        return new Intl.NumberFormat('en-PH', {
-            style: 'currency',
-            currency: 'PHP',
+        return new Intl.NumberFormat("en-PH", {
+            style: "currency",
+            currency: "PHP",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(price);
@@ -48,13 +48,12 @@ const Dashboard = () => {
                 setProducts(data);
                 setFiltered(data);
 
-                //EXTRACT BRANDS AND CATEGORIES FROM PRODUCT DATA (UNIQUE VALUES ONLY)
                 const brandSet = new Set();
                 const categorySet = new Set();
 
                 data.forEach(product => {
                     if (product.brand?._id) {
-                        brandSet.add(JSON.stringify(product.brand)); // convert object to string to store unique brand objects
+                        brandSet.add(JSON.stringify(product.brand));
                     }
                     if (product.category?.name) {
                         categorySet.add(JSON.stringify(product.category));
@@ -76,7 +75,6 @@ const Dashboard = () => {
         fetchProducts();
     }, []);
 
-    // Detect overflow for both filters when data changes
     useEffect(() => {
         const checkBrandOverflow = () => {
             if (brandScrollRef.current) {
@@ -129,19 +127,9 @@ const Dashboard = () => {
         setFiltered(filteredData);
     };
 
-
-    //FOR SEARCH AND FILTER OF BRAND AND CATEGORIES
     useEffect(() => {
         applyFilters(search, selectedBrand, selectedCategory);
     }, [search, selectedBrand, selectedCategory, products]);
-
-    if (loading) {
-
-        return <LoaderPage />;
-    }
-
-
-
 
     const handleBrandClick = (brand) => {
         setSelectedBrand(brand);
@@ -165,6 +153,10 @@ const Dashboard = () => {
     const scrollRight = (ref) => {
         ref.current.scrollLeft += 150;
     };
+
+    if (loading) {
+        return <LoaderPage />;
+    }
 
     return (
         <div>
@@ -192,7 +184,7 @@ const Dashboard = () => {
                     <button
                         onClick={handleRemoveFilter}
                         className={`absolute right-1 top-1 text-white rounded-full p-[6px] bg-[#990000] cursor-pointer hover:scale-110 ease-in-out duration-300
-                            ${search ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                            ${search ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -219,7 +211,7 @@ const Dashboard = () => {
                                         key={brand._id}
                                         onClick={() => handleBrandClick(brand.name)}
                                         className={`outline-5 flex-none rounded-xl md:mx-2 mx-[5px] my-2 bg-white w-20 h-20 cursor-pointer duration-300 ease-in-out hover:scale-105
-                                            ${selectedBrand === brand.name ? 'outline-[#990000]' : 'outline-white/0'}`}
+                                            ${selectedBrand === brand.name ? "outline-[#990000]" : "outline-white/0"}`}
                                     >
                                         <img
                                             src={brand.logo?.url.replace("/upload/", "/upload/w_500,/")}
@@ -259,7 +251,7 @@ const Dashboard = () => {
                                         key={category._id}
                                         onClick={() => handleCategoryClick(category.name)}
                                         className={`outline-5 flex flex-col justify-end pb-1 rounded-xl md:mx-2 mx-[5px] my-2 bg-white w-25 h-18 shrink-0 cursor-pointer duration-300 ease-in-out hover:scale-105
-                                            ${selectedCategory === category.name ? 'outline-[#990000]' : 'outline-white/0'}`}
+                                            ${selectedCategory === category.name ? "outline-[#990000]" : "outline-white/0"}`}
                                     >
                                         <img
                                             src={category.image?.url.replace("/upload/", "/upload/w_500,/")}
@@ -285,7 +277,7 @@ const Dashboard = () => {
                 <button
                     onClick={handleRemoveFilter}
                     className={`block md:text-sm text-xs text-white font-semibold md:py-1 py-2 rounded-b-xl px-4 mx-auto bg-[#990000] cursor-pointer hover:bg-[#990000] transition-all ease-in-out duration-300
-                        ${selectedBrand || selectedCategory ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                        ${selectedBrand || selectedCategory ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                 >
                     Clear Filters
                 </button>

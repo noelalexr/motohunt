@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoaderPage from "./LoaderPage";
 import { useNavigate, Link } from "react-router";
 
@@ -8,16 +8,15 @@ function Profile() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [products, setProducts] = useState([]);
-    const [user, setUser] = useState(null);
 
     const handlePhotoClick = () => {
         navigate("/profile/upload-photo");
     };
 
     const formatPeso = (price) => {
-        return new Intl.NumberFormat('en-PH', {
-            style: 'currency',
-            currency: 'PHP',
+        return new Intl.NumberFormat("en-PH", {
+            style: "currency",
+            currency: "PHP",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(price);
@@ -26,7 +25,6 @@ function Profile() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                //FETCH PROFILE DATA
                 const profileResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`, {
                     method: "GET",
                     credentials: "include",
@@ -39,7 +37,6 @@ function Profile() {
                 });
                 const productsData = await resProducts.json();
                 setProducts(productsData);
-                console.log("Products Data:", productsData);
             } catch (error) {
                 console.error("Error fetching data:", error);
                 setError(error.message);
@@ -61,7 +58,6 @@ function Profile() {
                 credentials: "include",
             });
 
-            // Remove the product from local state after deletion
             setProducts(products.filter((product) => product._id !== productId));
         } catch (err) {
             console.error(err);
@@ -86,11 +82,9 @@ function Profile() {
         return <LoaderPage />;
     }
 
-    // console.log(record)
-
     return (
         <div>
-            <div className="bg-white/10 md:p-10">
+            <div className="bg-white/10 md:p-10 pb-10">
                 <div className="md:w-150 mx-auto">
                     <div className="bg-[#990000b4] px-30 pt-15 pb-35 md:rounded-t-lg">
                         <img src="/images/logo/logo-white.png" alt="" />
@@ -116,7 +110,7 @@ function Profile() {
                     </div>
                 </div>
 
-                <div className="flex justify-center gap-5 py-10 border-b-2 border-[#990000] md:mx-[3vw] mx-3">
+                <div className="flex justify-center gap-5 py-10 border-b-2 border-[#990000] md:mx-[3vw] mx-3 text-xs">
                     <div onClick={() => navigate("/add-product")} className="flex gap-2 bg-[#990000] text-white py-3 px-5 rounded-full cursor-pointer hover:scale-105 ease-in-out duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

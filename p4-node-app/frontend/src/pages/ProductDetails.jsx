@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import LoaderPage from "./LoaderPage";
 
@@ -10,9 +10,9 @@ const ProductDetails = () => {
     const [wishlist, setWishlist] = useState([]);
 
     const formatPeso = (price) => {
-        return new Intl.NumberFormat('en-PH', {
-            style: 'currency',
-            currency: 'PHP',
+        return new Intl.NumberFormat("en-PH", {
+            style: "currency",
+            currency: "PHP",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(price);
@@ -28,7 +28,6 @@ const ProductDetails = () => {
                 const data = await response.json();
                 setProductsDetails(data);
 
-                //FETCH WISHLIST
                 const wishlistResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist`, {
                     credentials: "include",
                 });
@@ -46,13 +45,6 @@ const ProductDetails = () => {
         fetchData();
     }, [id]);
 
-    if (loading) {
-        return <LoaderPage />;
-    }
-
-    if (loading) {
-        return <LoaderPage />;
-    }
 
     const addToWishlist = async (productId) => {
         try {
@@ -86,7 +78,9 @@ const ProductDetails = () => {
 
     const isInWishlist = (productId) => wishlist.includes(productId);
 
-    console.log(productDetails)
+    if (loading) {
+        return <LoaderPage />;
+    }
 
     return (
         <div className="md:p-10 bg-white/10 min-h-screen flex flex-col justify-center">
@@ -153,12 +147,12 @@ const ProductDetails = () => {
                             />
                             <div className="flex flex-col justify-center">
                                 <p className="font-semibold text-[12px]">{productDetails.user.name}</p>
-                                <p className="font-semibold text-gray-400">{new Date(productDetails.createdAt).toLocaleString('en-PH', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                    hour: 'numeric',
-                                    minute: 'numeric'
+                                <p className="font-semibold text-gray-400">{new Date(productDetails.createdAt).toLocaleString("en-PH", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric"
                                 })}</p>
                             </div>
                         </div>

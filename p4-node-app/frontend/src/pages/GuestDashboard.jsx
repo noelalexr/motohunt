@@ -9,9 +9,9 @@ const GuestDashboard = () => {
     const [filtered, setFiltered] = useState([]);
 
     const formatPeso = (price) => {
-        return new Intl.NumberFormat('en-PH', {
-            style: 'currency',
-            currency: 'PHP',
+        return new Intl.NumberFormat("en-PH", {
+            style: "currency",
+            currency: "PHP",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(price);
@@ -36,8 +36,6 @@ const GuestDashboard = () => {
         fetchPublicProducts();
     }, []);
 
-
-
     const applyFilters = (searchText) => {
         let filteredData = [...products];
 
@@ -51,7 +49,6 @@ const GuestDashboard = () => {
         setFiltered(filteredData);
     };
 
-    //FOR SEARCH AND FILTER OF BRAND AND CATEGORIES
     useEffect(() => {
         applyFilters(search);
     }, [search, products]);
@@ -88,7 +85,7 @@ const GuestDashboard = () => {
                     <button
                         onClick={handleRemoveFilter}
                         className={`absolute right-1 top-1 text-white rounded-full p-[6px] bg-[#990000] cursor-pointer hover:scale-110 ease-in-out duration-300
-                            ${search ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                            ${search ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />

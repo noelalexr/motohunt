@@ -1,7 +1,7 @@
 import productModel from "../models/productModel.js";
-import brandModel from "../models/brandModel.js";
-import categoryModel from "../models/categoryModel.js";
-import userModel from "../models/userModel.js"
+import brandModel from "../models/brandModel.js"; //FOR POPULATE
+import categoryModel from "../models/categoryModel.js"; //FOR POPULATE
+import userModel from "../models/userModel.js" //FOR POPULATE
 import cloudinary from "../configs/cloudinaryConfig.js"
 import multer from "multer";
 
@@ -12,7 +12,6 @@ const list = async (req, res) => {
     const search = req.query.search?.toLowerCase();
     try {
         let pipeline = [
-            // Join with brand collection
             {
                 $lookup: {
                     from: "brands",
@@ -23,7 +22,6 @@ const list = async (req, res) => {
             },
             { $unwind: "$brand" },
 
-            // Join with category collection
             {
                 $lookup: {
                     from: "categories",
@@ -35,7 +33,6 @@ const list = async (req, res) => {
             { $unwind: "$category" },
         ];
 
-        // If search query exists, add match stage
         if (search) {
             pipeline.push({
                 $match: {
@@ -73,7 +70,6 @@ const create = async (req, res) => {
             user: req.body.user,
             image: { url: result.secure_url }
         });
-        // const newProduct = new productModel(req.body);
         await newProduct.save();
         res.status(201).json(newProduct);
     } catch (err) {
@@ -94,35 +90,6 @@ const read = async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 };
-
-// const update = (req, res) => {
-//   const id = parseInt(req.params.id);
-//   const productIndex = records.products.findIndex(
-//     (record) => parseInt(record.id) === id
-//   );
-
-//   if (productIndex === -1) {
-//     res.status(404).json({ error: "Product not found!" });
-//     return;
-//   }
-
-//   records.products[productIndex] = { ...req.body, id: id };
-//   res.json(records.products[productIndex]);
-// }
-
-//EDIT EXISTING PRODUCT
-// const patch = async (req, res) => {
-//     try {
-//         const patched = await productModel.findOneAndUpdate( {_id: req.params.id}, req.body, {
-//             new: true,
-//         });
-//         if (!patched) return res.status(404).json({ error: "Product not found"});
-//         res.json(patched);
-//     } catch (err) {
-//         res.status(400).json({ error: err.message });
-//     }
-
-// }
 
 const patch = async (req, res) => {
     try {
@@ -164,9 +131,7 @@ const deleteProduct = async (req, res) => {
 
 const getUserProducts = async (req, res) => {
     try {
-        const userId = req.params.userId; // If you"re using auth middleware (recommended)
-        // OR
-        // const userId = req.params.userId; // If you"re passing userId manually
+        const userId = req.params.userId;
 
         const products = await productModel.find({ user: userId })
             .populate("brand name")

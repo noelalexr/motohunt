@@ -13,17 +13,12 @@ import UploadProfilePhoto from "./pages/UploadProfilePhoto.jsx";
 import Wishlist from "./pages/Wishlist.jsx";
 import EditProduct from "./pages/EditProduct.jsx";
 
-//COMPONENTS
-// const LoadingFallback = () => <div>Loading...</div>;
-
-
 async function checkAuth() {
     try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard`, {
             method: "GET",
             credentials: "include",
         });
-        // console.log(res);
         if (!res.ok) {
             throw new Error("Not authenticated");
         }
@@ -52,7 +47,6 @@ const router = createBrowserRouter([
             }
         },
         element: <Navigate to="/login" />,
-        // HydrateFallback: LoadingFallback,
     },
     {
         path: "/login",
@@ -70,7 +64,6 @@ const router = createBrowserRouter([
         path: "/dashboard",
         loader: checkAuth,
         element: <Dashboard />,
-        // HydrateFallback: LoadingFallback,
     },
     {
         path: "/products/:id",
@@ -85,19 +78,16 @@ const router = createBrowserRouter([
         path: "/profile",
         loader: checkAuth,
         element: <Profile />,
-        // HydrateFallback: LoadingFallback,
     },
     {
         path: "/profile/upload-photo",
         loader: checkAuth,
         element: <UploadProfilePhoto />,
-        // HydrateFallback: LoadingFallback,
     },
     {
         path: "/wishlist",
         loader: checkAuth,
         element: <Wishlist />,
-        // HydrateFallback: LoadingFallback,
     },
     {
         path: "/add-product",

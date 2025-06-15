@@ -8,15 +8,13 @@ const upload = multer({ dest: 'uploads/' });
 
 router.get("/", list);
 
-router.post("/",upload.single('image'), isAuthenticated, create);
+router.post("/", upload.single('image'), isAuthenticated, create);
 
 router.get("/:id", isAuthenticated, read);
 
-// router.put("/:id", update);
+router.patch("/:id", upload.single('image'), isAuthenticated, patch);
 
-router.patch("/:id",upload.single('image'), isAuthenticated, patch);
-
-router.delete("/:id", isAuthenticated, deleteProduct);+
+router.delete("/:id", isAuthenticated, deleteProduct);
 
 router.get("/user/:userId", isAuthenticated, getUserProducts);
 
