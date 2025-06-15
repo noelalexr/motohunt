@@ -122,7 +122,7 @@ const GuestDashboard = () => {
                 </div>
             </div>
             <div className="bg-[#990009] text-xs text-center py-5 text-white">
-                <p>MOTOHUNT | Designed and Developed by <b>Alaxander Noel</b></p>
+                <p>MOTOHUNT | Designed and Developed by <b>Alexander Noel</b></p>
                 <p>© 2025 All Rights Reserved</p>
             </div>
         </div>

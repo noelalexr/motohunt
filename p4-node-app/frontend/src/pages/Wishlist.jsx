@@ -8,6 +8,15 @@ function Wishlist() {
     const [error, setError] = useState(null);
     const [wishlist, setWishlist] = useState([]);
 
+    const formatPeso = (price) => {
+        return new Intl.NumberFormat('en-PH', {
+            style: 'currency',
+            currency: 'PHP',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(price);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -77,7 +86,7 @@ function Wishlist() {
                                 </div>
                                 <div className="bg-white flex flex-col justify-center w-85 pr-10 pl-5 rounded-r-lg group-hover:text-[#990000]">
                                     <h3 className="text-lg font-semibold">{product.name}</h3>
-                                    <p className="text-md">{product.price}</p>
+                                    <p className="text-md">{formatPeso(product.price)}</p>
                                 </div>
                                 <button
                                     onClick={(e) => {

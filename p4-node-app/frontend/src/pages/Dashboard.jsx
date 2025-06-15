@@ -285,7 +285,7 @@ const Dashboard = () => {
                 <button
                     onClick={handleRemoveFilter}
                     className={`block md:text-sm text-xs text-white font-semibold md:py-1 py-2 rounded-b-xl px-4 mx-auto bg-[#990000] cursor-pointer hover:bg-[#990000] transition-all ease-in-out duration-300
-                        ${selectedBrand || selectedCategory || search ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                        ${selectedBrand || selectedCategory ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
                 >
                     Clear Filters
                 </button>
@@ -319,7 +319,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="bg-[#990009] text-xs text-center py-5 text-white">
-                <p>MOTOHUNT | Designed and Developed by <b>Alaxander Noel</b></p>
+                <p>MOTOHUNT | Designed and Developed by <b>Alexander Noel</b></p>
                 <p>© 2025 All Rights Reserved</p>
             </div>
         </div >

@@ -140,7 +140,7 @@ const ProductDetails = () => {
                         <p><b>Brand: </b>{productDetails.brand.name}</p>
                         <p><b>Price: </b>{formatPeso(productDetails.price)}</p>
                         <p><b>Category: </b>{productDetails.category.name}</p>
-                        <p><b>Engince Displacement: </b>{productDetails.engineDisplacement}cc</p>
+                        <p><b>Engine Displacement: </b>{productDetails.engineDisplacement}cc</p>
                     </div>
 
                     <p className="font-bold text-sm text-[#990000] pb-2">Posted by:</p>

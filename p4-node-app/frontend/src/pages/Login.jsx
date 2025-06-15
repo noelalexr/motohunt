@@ -70,12 +70,13 @@ const Login = () => {
                         </div>
                     </form>
                 </div>
-                <div className="bg-[#990000] md:w-[40%] p-10 rounded-b-lg md:rounded-bl-none md:rounded-r-lg text-white flex flex-col justify-center items-center text-center">
+                <div className="relative bg-[#990000] md:w-[40%] p-10 rounded-b-lg md:rounded-bl-none md:rounded-r-lg text-white flex flex-col justify-center items-center text-center">
                     <p className="md:text-3xl text-2xl pb-8 font-bold">New Here?</p>
                     <p className="text-sm">Sign up or continue as Guest User and explore the world of motorcycle!</p>
                     <a href="/register" className="bg-white text-black py-2 px-5 rounded-full mt-8 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Sign Up</a>
                     <p className="mt-1 text-sm">or</p>
                     <a href="/guest-dashboard" className="bg-white text-black py-2 px-5 rounded-full mt-1 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Continue at Guest User</a>
+                    <p className="absolute bottom-4 right-5 text-[9px] text-white/70">Developed by <b>Alexander Noel</b></p>
                 </div>
             </div>
         </div>

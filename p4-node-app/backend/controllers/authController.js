@@ -40,7 +40,7 @@ const register = async (req, res) => {
                 · Email: ${savedUser.email}<br><br>
 
                 You can now log in to your dashboard, update your profile, and begin your first search.<br>
-                Access your dashboard here: <a href="https://motohunt.com/dashboard">https://motohunt.com/dashboard</a><br><br>
+                Access your dashboard here: <a href="https://motohunt-4wzp.onrender.com">https://motohunt-4wzp.onrender.com</a><br><br>
 
                 If you did not initiate this registration, or you believe someone else used your email address in error, please contact us immediately at <a href="mailto:noelalexr@gmail.com">contact support</a>.<br><br>
 
@@ -53,7 +53,7 @@ const register = async (req, res) => {
 
                 <strong>Need help?</strong><br>
                 📧 <a href="mailto:noelalexr@gmail.com">noelalexr@gmail.com</a><br>
-                🌐 <a href="https://motohunt.com" target="_blank">motohunt.com</a>
+                🌐 <a href="https://motohunt-4wzp.onrender.com" target="_blank">https://motohunt-4wzp.onrender.com</a>
             `
         )
 

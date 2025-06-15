@@ -91,9 +91,9 @@ function EditProduct() {
     };
 
     return (
-        <div className="min-h-screen flex justify-center items-center py-15">
-            <form onSubmit={handleSubmit} className="relative flex flex-col gap-3 bg-white/60 p-15 px-25 text-center rounded-lg">
-                <div onClick={() => navigate("/profile")} className="absolute top-14 left-8 rounded-full text-[#990000] p-3 hover:bg-[#990000] hover:text-white ease-in-out duration-300 cursor-pointer">
+        <div className="min-h-screen flex justify-center items-center p-8">
+            <form onSubmit={handleSubmit} className="relative flex flex-col gap-3 bg-white/60 md:py-15 py-10 md:px-20 px-12 text-center rounded-lg">
+                <div onClick={() => navigate("/profile")} className="absolute top-14 md:left-6 left-4 rounded-full text-[#990000] p-3 hover:bg-[#990000] hover:text-white ease-in-out duration-300 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                     </svg>
@@ -130,7 +130,7 @@ function EditProduct() {
                     required
                     className="outline-2 outline-white/0 w-[100%] py-2 px-3 bg-white rounded-md text-sm text-gray-600 focus:outline-[#990000] transition-colors duration-300"
                 />
-                <select value={brand} onChange={(e) => setBrand(e.target.value)} className="mx-auto w-[50%] py-2 px-3 bg-[#990000] rounded-md text-sm text-white transition-colors duration-300 cursor-pointer hover:bg-[#770000]" required>
+                <select value={brand} onChange={(e) => setBrand(e.target.value)} className="mx-auto w-[70%] py-2 px-3 bg-[#990000] rounded-md text-sm text-white transition-colors duration-300 cursor-pointer hover:bg-[#770000]" required>
                     <option value="">Select Brand</option>
                     {brands.map((b) => (
                         <option key={b._id} value={b._id}>
@@ -138,7 +138,7 @@ function EditProduct() {
                         </option>
                     ))}
                 </select>
-                <select value={category} onChange={(e) => setCategory(e.target.value)} className="mx-auto w-[50%] py-2 px-3 bg-[#990000] rounded-md text-sm text-white transition-colors duration-300 cursor-pointer hover:bg-[#770000]" required>
+                <select value={category} onChange={(e) => setCategory(e.target.value)} className="mx-auto w-[70%] py-2 px-3 bg-[#990000] rounded-md text-sm text-white transition-colors duration-300 cursor-pointer hover:bg-[#770000]" required>
                     <option value="">Select Category</option>
                     {categories.map((c) => (
                         <option key={c._id} value={c._id}>
