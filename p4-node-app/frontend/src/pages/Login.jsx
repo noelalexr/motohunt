@@ -42,7 +42,10 @@ const Login = () => {
         <div className="min-h-screen flex justify-center items-center md:p-20 p-5">
             <div className="md:flex w-[80vw] max-w-220">
                 <div className="bg-white/60 p-10 md:w-[60%] rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
-                    <img src="/images/logo/logo-red.png" alt="motohunt-logo" className="w-75 mx-auto pb-9" />
+                    <div className="relative">
+                        <img src="/images/logo/logo-red.png" alt="motohunt-logo" className="w-75 mx-auto pb-9" />
+                        <p className="text-black absolute top-1/2 left-1/2 transform md:-translate-x-[46%] md:-translate-y-[10%] -translate-x-[39%] -translate-y-[20%] font-bold md:text-xs text-[10px] whitespace-nowrap">Ride smarter. Hunt better.</p>
+                    </div>
                     <p className="text-center md:text-3xl text-2xl font-bold pb-8">Login to your Account</p>
                     <form onSubmit={handleSubmit}>
                         <div>
@@ -72,7 +75,7 @@ const Login = () => {
                 </div>
                 <div className="relative bg-[#990000] md:w-[40%] px-10 md:py-10 py-15 rounded-b-lg md:rounded-bl-none md:rounded-r-lg text-white flex flex-col justify-center items-center text-center">
                     <p className="md:text-3xl text-2xl pb-8 font-bold">New Here?</p>
-                    <p className="text-sm">Sign up or continue as Guest User and explore the world of motorcycle!</p>
+                    <p className="text-sm">Sign up or continue as a Guest User and explore the world of motorcycles!</p>
                     <a href="/register" className="bg-white text-black py-2 px-5 rounded-full mt-8 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Sign Up</a>
                     <p className="mt-1 text-sm">or</p>
                     <a href="/guest-dashboard" className="bg-white text-black py-2 px-5 rounded-full mt-1 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Continue at Guest User</a>
