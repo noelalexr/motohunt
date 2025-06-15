@@ -19,7 +19,7 @@ import EditProduct from "./pages/EditProduct.jsx";
 
 async function checkAuth() {
     try {
-        const res = await fetch("http://localhost:3000/api/dashboard", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard`, {
             method: "GET",
             credentials: "include",
         });
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "/",
         loader: async () => {
             try {
-                const res = await fetch("http://localhost:3000/api/dashboard", {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard`, {
                     method: "GET",
                     credentials: "include",
                 });
