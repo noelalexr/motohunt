@@ -70,7 +70,7 @@ function Wishlist() {
                             <div className="relative md:m-5 m-3 flex group">
                                 <div className="overflow-hidden rounded-l-lg">
                                     <img
-                                        src={product.image.url.replace("/upload/", "/upload/c_fill,w_150,h_150/")}
+                                        src={product.image.url.replace("/upload/", "/upload/c_fill,w_500,h_500/")}
                                         alt={product.name}
                                         className="md:w-[150px] w-[130px] h-[150px] object-cover group-hover:scale-110 ease-in-out duration-300"
                                     />

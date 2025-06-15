@@ -87,7 +87,7 @@ function Profile() {
                 </div>
                 <div className="relative group">
                     <img
-                        src={record.photo.url.replace("/upload/", "/upload/c_fill,w_200,h_200/")}
+                        src={record.photo.url.replace("/upload/", "/upload/c_fill,w_500,h_500/")}
                         alt="Profile"
                         onClick={handlePhotoClick}
                         className="absolute left-1/2 -translate-x-1/2 md:top-[-120px] top-[-105px] w-[200px] h-[200px] rounded-full cursor-pointer z-1"
@@ -133,7 +133,7 @@ function Profile() {
                                     <div className="flex justify-center">
                                         <div className="overflow-hidden rounded-l-lg">
                                             <img
-                                                src={product.image.url.replace("/upload/", "/upload/c_fill,w_200,h_200/")}
+                                                src={product.image.url.replace("/upload/", "/upload/c_fill,w_500,h_500/")}
                                                 alt={product.name}
                                                 className="md:w-40 w-30 h-40 object-cover rounded-l-lg group-hover:scale-110 ease-in-out duration-300"
                                             />

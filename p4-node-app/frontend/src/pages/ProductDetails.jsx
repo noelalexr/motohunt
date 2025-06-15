@@ -93,7 +93,7 @@ const ProductDetails = () => {
             <div className="md:flex justify-center">
                 <div className="relative overflow-hidden md:rounded-l-lg bg-black">
                     <img
-                        src={productDetails.image.url.replace("/upload/", "/upload/c_fill,ar_4:3,w_1500/")}
+                        src={productDetails.image.url.replace("/upload/", "/upload/c_fill,ar_4:3,w_2000/")}
                         alt={productDetails.name}
                         className="w-190 hover:scale-110 ease-in-out duration-300"
                     />
@@ -147,7 +147,7 @@ const ProductDetails = () => {
                     <div className="bg-gray-200 p-2 mx-5 rounded-full text-xs text-gray-600">
                         <div className="flex gap-3">
                             <img
-                                src={productDetails.user.photo.url.replace("/upload/", "/upload/c_fill,w_50,h_50/")}
+                                src={productDetails.user.photo.url.replace("/upload/", "/upload/c_fill,w_150,h_150/")}
                                 alt="User"
                                 className="w-12 h-12 rounded-full"
                             />

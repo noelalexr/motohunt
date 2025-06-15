@@ -12,7 +12,7 @@ input:-webkit-autofill {
 }
 
 html {
-    background-image: url('/images/backgrounds/bg1.jpg');
+    background-image: url('/images/backgrounds/bg.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
