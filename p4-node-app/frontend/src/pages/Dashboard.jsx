@@ -164,7 +164,7 @@ const Dashboard = () => {
                 <div className="flex justify-between md:py-4 md:px-[10vw] p-3 bg-[#990000]">
                     <img src="/images/logo/logo-white.png" alt="motohunt-logo" className="md:h-[30px] h-[20px] my-auto" />
                     <img
-                        src={user.photo.url.replace("/upload/", "/upload/c_fill,w_150,h_150/")}
+                        src={user.photo.url.replace("/upload/", "/upload/c_fill,w_150,h_150/").replace(/^http:\/\//, "https://")}
                         alt="Profile"
                         onClick={() => navigate("/profile")}
                         className="md:h-[45px] h-[35px] rounded-full cursor-pointer border-2 border-white"
@@ -214,7 +214,7 @@ const Dashboard = () => {
                                             ${selectedBrand === brand.name ? "outline-[#990000]" : "outline-white/0"}`}
                                     >
                                         <img
-                                            src={brand.logo?.url.replace("/upload/", "/upload/w_500,/")}
+                                            src={brand.logo?.url.replace("/upload/", "/upload/w_500,/").replace(/^http:\/\//, "https://")}
                                             alt={brand.name}
                                             className="w-[50px] mx-auto"
                                         />
@@ -254,7 +254,7 @@ const Dashboard = () => {
                                             ${selectedCategory === category.name ? "outline-[#990000]" : "outline-white/0"}`}
                                     >
                                         <img
-                                            src={category.image?.url.replace("/upload/", "/upload/w_500,/")}
+                                            src={category.image?.url.replace("/upload/", "/upload/w_500,/").replace(/^http:\/\//, "https://")}
                                             alt={category.name}
                                             className="w-[55px] mx-auto"
                                         />
@@ -296,7 +296,7 @@ const Dashboard = () => {
                             <div className="group">
                                 <div className="overflow-hidden rounded-t-lg bg-black">
                                     <img
-                                        src={product.image.url.replace("/upload/", "/upload/c_fill,w_1000,h_563/")}
+                                        src={product.image.url.replace("/upload/", "/upload/c_fill,w_1000,h_563/").replace(/^http:\/\//, "https://")}
                                         alt={product.name}
                                         className="md:w-[350px] md:h-[197px] object-cover rounded-t-lg group-hover:scale-110 ease-in-out duration-300"
                                     />
