@@ -20,7 +20,7 @@ const port = process.env.port || 3000;
 const app = express();
 
 const allowedOrigins = [
-    "http://localhost:5173",
+    "http://localhost:5174",
     "https://motohunt-4wzp.onrender.com" //RENDER FRONT END LIVE SITE
 ];
 

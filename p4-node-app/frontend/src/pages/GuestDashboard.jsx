@@ -105,7 +105,7 @@ const GuestDashboard = () => {
                         <div key={product._id} onClick={() => alert("Please login!")} className="m-5 group cursor-pointer">
                             <div className="overflow-hidden rounded-t-lg bg-black">
                                 <img
-                                    src={product.image.url.replace("/upload/", "/upload/c_fill,w_500,h_281/")}
+                                    src={product.image.url.replace("/upload/", "/upload/c_fill,w_1000,h_563/")}
                                     alt={product.name}
                                     className="md:w-[350px] md:h-[197px] object-cover rounded-t-lg group-hover:scale-110 ease-in-out duration-300"
                                 />
