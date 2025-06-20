@@ -12,6 +12,7 @@ import AddProduct from "./pages/AddProduct.jsx";
 import UploadProfilePhoto from "./pages/UploadProfilePhoto.jsx";
 import Wishlist from "./pages/Wishlist.jsx";
 import EditProduct from "./pages/EditProduct.jsx";
+import LoaderPage from "./pages/LoaderPage.jsx";
 
 async function checkAuth() {
     try {
@@ -46,8 +47,7 @@ const router = createBrowserRouter([
                 return redirect("/login");
             }
         },
-        element: <Navigate to="/login" />,
-        HydrateFallback: <div>Loading Root Route...</div>
+        element: <LoaderPage />,
     },
     {
         path: "/login",
