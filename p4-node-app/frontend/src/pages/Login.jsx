@@ -69,16 +69,16 @@ const Login = () => {
                             />
                         </div>
                         <div>
-                            <button type="submit" className="bg-[#990000] text-white block w-30 py-2 rounded-full mx-auto text-xs cursor-pointer hover:bg-[#770000] transition-colors duration-300">Login</button>
+                            <button type="submit" className="bg-[#990000] text-white block w-30 py-2 rounded-full mx-auto text-xs cursor-pointer hover:bg-[#770000] active:bg-[#770000] transition-colors duration-300">Login</button>
                         </div>
                     </form>
                 </div>
                 <div className="relative bg-[#990000] md:w-[40%] px-10 md:py-10 py-15 rounded-b-lg md:rounded-bl-none md:rounded-r-lg text-white flex flex-col justify-center items-center text-center">
                     <p className="md:text-3xl text-2xl pb-8 font-bold">New Here?</p>
                     <p className="text-sm">Sign up or continue as a Guest User and explore the world of motorcycles!</p>
-                    <a href="/register" className="bg-white text-black py-2 px-5 rounded-full mt-8 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Sign Up</a>
+                    <a href="/register" className="bg-white text-black py-2 px-5 rounded-full mt-8 text-xs hover:bg-[#c5f8ff] active:bg-[#c5f8ff] transition-colors duration-300">Sign Up</a>
                     <p className="mt-1 text-sm">or</p>
-                    <a href="/guest-dashboard" className="bg-white text-black py-2 px-5 rounded-full mt-1 text-xs hover:bg-[#c5f8ff] transition-colors duration-300">Continue as Guest User</a>
+                    <a href="/guest-dashboard" className="bg-white text-black py-2 px-5 rounded-full mt-1 text-xs hover:bg-[#c5f8ff] active:bg-[#c5f8ff] transition-colors duration-300">Continue as Guest User</a>
                     <p className="absolute bottom-3 right-4 text-[9px] text-white/70">Developed by <b>Alexander Noel</b></p>
                 </div>
             </div>

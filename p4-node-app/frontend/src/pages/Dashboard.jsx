@@ -20,6 +20,7 @@ const Dashboard = () => {
     const categoryScrollRef = useRef(null);
     const [isBrandOverflowing, setIsBrandOverflowing] = useState(false);
     const [isCategoryOverflowing, setIsCategoryOverflowing] = useState(false);
+    const [showScrollTop, setShowScrollTop] = useState(false);
 
     const formatPeso = (price) => {
         return new Intl.NumberFormat("en-PH", {
@@ -45,6 +46,7 @@ const Dashboard = () => {
                 });
 
                 const data = await response.json();
+                data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setProducts(data);
                 setFiltered(data);
 
@@ -152,6 +154,19 @@ const Dashboard = () => {
 
     const scrollRight = (ref) => {
         ref.current.scrollLeft += 150;
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollTop(window.scrollY > 300);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     if (loading) {
@@ -273,7 +288,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-white/10 pb-12 md:px-[10vw] min-h-[100vh]">
+            <div className="bg-white/10 pb-5 md:px-[10vw] min-h-[100vh]">
                 <button
                     onClick={handleRemoveFilter}
                     className={`block md:text-sm text-xs text-white font-semibold md:py-1 py-2 rounded-b-xl px-4 mx-auto bg-[#990000] cursor-pointer hover:bg-[#990000] transition-all ease-in-out duration-300
@@ -298,7 +313,7 @@ const Dashboard = () => {
                                     <img
                                         src={product.image.url.replace("/upload/", "/upload/c_fill,w_1000,h_563/")}
                                         alt={product.name}
-                                        className="md:w-[350px] md:h-[197px] object-cover rounded-t-lg group-hover:scale-110 ease-in-out duration-300"
+                                        className="md:w-[350px] md:h-[197px] object-cover rounded-t-lg group-hover:scale-110 group-active:scale-110 ease-in-out duration-300"
                                     />
                                 </div>
                                 <div className="bg-white p-4 rounded-b-lg z-1 group-hover:bg-[#990000] group-active:bg-[#990000] transition-colors duration-300">
@@ -309,6 +324,19 @@ const Dashboard = () => {
                         </Link>
                     ))}
                 </div>
+                {showScrollTop && (
+                    <div className="sticky bottom-5 mr-5 flex justify-end">
+                        <button
+                            onClick={scrollToTop}
+                            className="bg-[#990000] text-white p-3 rounded-full shadow-lg hover:bg-[#770000] active:bg-[#770000] transition-all ease-in-out duration-300 z-5 cursor-pointer"
+                            title="Back to top"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                )}
             </div>
             <div className="bg-[#990009] text-xs text-center py-5 text-white">
                 <p>MOTOHUNT | Designed and Developed by <b>Alexander Noel</b></p>

@@ -83,10 +83,10 @@ const Register = () => {
                             placeholder="Password"
                             className="outline-2 outline-white/0 w-[100%] block mx-auto py-2 px-3 bg-[#D9F5FF] rounded-full mb-5 text-xs focus:outline-[#990000] transition-colors duration-300"
                         />
-                        <button type="submit" className="bg-[#990000] text-white block w-30 py-2 rounded-full mx-auto text-xs cursor-pointer hover:bg-[#770000] transition-colors duration-300">Register</button>
+                        <button type="submit" className="bg-[#990000] text-white block w-30 py-2 rounded-full mx-auto text-xs cursor-pointer hover:bg-[#770000] active:bg-[#770000] transition-colors duration-300">Register</button>
                         <div className="mt-5 gap-1">
                             <p className="text-sm">Already have an account?</p>
-                            <a href="/Login" className="text-sm text-[#990000] font-semibold underline hover:text-[#770000] transition-colors duration-300">Login</a>
+                            <a href="/Login" className="text-sm text-[#990000] font-semibold underline hover:text-[#770000] active:text-[#770000] transition-colors duration-300">Login</a>
                         </div>
                     </form>
                 )}

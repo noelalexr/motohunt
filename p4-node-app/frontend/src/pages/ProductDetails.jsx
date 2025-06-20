@@ -8,6 +8,7 @@ const ProductDetails = () => {
     const [loading, setLoading] = useState(true);
     const [productDetails, setProductsDetails] = useState([]);
     const [wishlist, setWishlist] = useState([]);
+    const [wishlistLoading, setWishlistLoading] = useState(false);
 
     const formatPeso = (price) => {
         return new Intl.NumberFormat("en-PH", {
@@ -48,6 +49,7 @@ const ProductDetails = () => {
 
     const addToWishlist = async (productId) => {
         try {
+            setWishlistLoading(true);
             await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist/add`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -58,11 +60,14 @@ const ProductDetails = () => {
             setWishlist(prev => [...prev, productId]);
         } catch (err) {
             console.error("Failed to add to wishlist:", err);
+        } finally {
+            setWishlistLoading(false);
         }
     };
 
     const removeFromWishlist = async (productId) => {
         try {
+            setWishlistLoading(true);
             await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist/remove`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -73,6 +78,8 @@ const ProductDetails = () => {
             setWishlist(prev => prev.filter(id => id !== productId));
         } catch (err) {
             console.error("Failed to remove from wishlist:", err);
+        } finally {
+            setWishlistLoading(false);
         }
     };
 
@@ -91,7 +98,7 @@ const ProductDetails = () => {
                         alt={productDetails.name}
                         className="md:w-[40vw] h-full object-cover hover:scale-110 ease-in-out duration-300"
                     />
-                    <div onClick={() => navigate(-1)} className="absolute top-5 left-5 bg-[#990000] rounded-full text-white p-3 hover:scale-110 ease-in-out duration-300 cursor-pointer">
+                    <div onClick={() => navigate(-1)} className="absolute top-5 left-5 bg-[#990000] rounded-full text-white p-3 hover:scale-110 active:bg-[#770000] ease-in-out duration-300 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                         </svg>
@@ -105,12 +112,18 @@ const ProductDetails = () => {
                                 e.preventDefault();
                                 removeFromWishlist(productDetails._id);
                             }}
-                            className="text-xs font-semibold border-2 text-white bg-red-500 border-red-500 w-50 py-1 px-2 rounded-2xl mx-auto mt-5 cursor-pointer flex gap-1 transition-colors duration-300"
+                            className="text-xs font-semibold border-2 text-white bg-red-500 border-red-500 w-50 py-1 px-2 rounded-2xl mx-auto mt-5 cursor-pointer transition-colors duration-300"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            </svg>
-                            <p className="m-auto">Remove from Wishlist</p>
+                            {wishlistLoading ? (
+                                <div className="animate-spin rounded-full h-6 w-6 border-3 border-white/80 border-b-white/0 mx-auto"></div>
+                            ) : (
+                                <div className="flex gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                    </svg>
+                                    <p className="m-auto">Remove from Wishlist</p>
+                                </div>
+                            )}
                         </button>
                     ) : (
                         <button
@@ -118,12 +131,18 @@ const ProductDetails = () => {
                                 e.preventDefault();
                                 addToWishlist(productDetails._id);
                             }}
-                            className="text-xs font-semibold border-2 text-red-500 border-red-500 w-50 py-1 px-2 rounded-2xl mx-auto mt-5 cursor-pointer flex transition-colors duration-300"
+                            className="text-xs font-semibold border-2 text-red-500 border-red-500 w-50 py-1 px-2 rounded-2xl mx-auto mt-5 cursor-pointer transition-colors duration-300"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                            </svg>
-                            <p className="m-auto">Add to Wishlist</p>
+                            {wishlistLoading ? (
+                                <div className="animate-spin rounded-full h-6 w-6 border-3 border-white/80 border-b-white/0 mx-auto"></div>
+                            ) : (
+                                <div className="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                    </svg>
+                                    <p className="m-auto">Add to Wishlist</p>
+                                </div>
+                            )}
                         </button>
                     )}
                     <div className="pt-10 md:hidden">
