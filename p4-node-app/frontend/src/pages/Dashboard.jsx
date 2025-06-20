@@ -196,7 +196,7 @@ const Dashboard = () => {
                     <div className="flex justify-center">
                         <div className="relative overflow-hidden">
                             {isBrandOverflowing && (
-                                <button onClick={() => scrollLeft(brandScrollRef)} className="text-white bg-[#990000b9] absolute left-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] z-1 cursor-pointer">
+                                <button onClick={() => scrollLeft(brandScrollRef)} className="text-white bg-[#990000b9] absolute left-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] active:bg-[#990000] z-1 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 m-auto">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                                     </svg>
@@ -222,7 +222,7 @@ const Dashboard = () => {
                                 ))}
                             </div>
                             {isBrandOverflowing && (
-                                <button onClick={() => scrollRight(brandScrollRef)} className="text-white bg-[#990000b9] absolute right-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] z-1 cursor-pointer">
+                                <button onClick={() => scrollRight(brandScrollRef)} className="text-white bg-[#990000b9] absolute right-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] active:bg-[#990000] z-1 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 m-auto">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                     </svg>
@@ -236,7 +236,7 @@ const Dashboard = () => {
                     <div className="flex justify-center">
                         <div className="relative overflow-hidden">
                             {isCategoryOverflowing && (
-                                <button onClick={() => scrollLeft(categoryScrollRef)} className="text-white bg-[#990000b9] absolute left-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] z-1 cursor-pointer">
+                                <button onClick={() => scrollLeft(categoryScrollRef)} className="text-white bg-[#990000b9] absolute left-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] active:bg-[#990000] z-1 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 m-auto">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                                     </svg>
@@ -263,7 +263,7 @@ const Dashboard = () => {
                                 ))}
                             </div>
                             {isCategoryOverflowing && (
-                                <button onClick={() => scrollRight(categoryScrollRef)} className="text-white bg-[#990000b9] absolute right-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] z-1 cursor-pointer">
+                                <button onClick={() => scrollRight(categoryScrollRef)} className="text-white bg-[#990000b9] absolute right-0 top-[23px] w-9 h-9 rounded-full text-lg hover:bg-[#990000] active:bg-[#990000] z-1 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 m-auto">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                     </svg>
@@ -301,9 +301,9 @@ const Dashboard = () => {
                                         className="md:w-[350px] md:h-[197px] object-cover rounded-t-lg group-hover:scale-110 ease-in-out duration-300"
                                     />
                                 </div>
-                                <div className="bg-white p-4 rounded-b-lg z-1 group-hover:bg-[#990000] transition-colors duration-300">
-                                    <h3 className="text-lg font-bold group-hover:text-white">{product.name}</h3>
-                                    <p className="text-sm group-hover:text-white">{formatPeso(product.price)}</p>
+                                <div className="bg-white p-4 rounded-b-lg z-1 group-hover:bg-[#990000] group-active:bg-[#990000] transition-colors duration-300">
+                                    <h3 className="text-lg font-bold group-hover:text-white group-active:text-white">{product.name}</h3>
+                                    <p className="text-sm group-hover:text-white group-active:text-white">{formatPeso(product.price)}</p>
                                 </div>
                             </div>
                         </Link>

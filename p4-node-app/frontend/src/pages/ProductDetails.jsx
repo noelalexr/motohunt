@@ -89,7 +89,7 @@ const ProductDetails = () => {
                     <img
                         src={productDetails.image.url.replace("/upload/", "/upload/c_fill,ar_4:3,w_2000/")}
                         alt={productDetails.name}
-                        className="w-190 hover:scale-110 ease-in-out duration-300"
+                        className="md:w-[40vw] h-full object-cover hover:scale-110 ease-in-out duration-300"
                     />
                     <div onClick={() => navigate(-1)} className="absolute top-5 left-5 bg-[#990000] rounded-full text-white p-3 hover:scale-110 ease-in-out duration-300 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

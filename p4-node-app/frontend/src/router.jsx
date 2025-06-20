@@ -47,6 +47,7 @@ const router = createBrowserRouter([
             }
         },
         element: <Navigate to="/login" />,
+        HydrateFallback: <div>Loading Root Route...</div>
     },
     {
         path: "/login",
