@@ -46,7 +46,10 @@ const Dashboard = () => {
                 });
 
                 const data = await response.json();
-                data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                for (let i = data.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [data[i], data[j]] = [data[j], data[i]];
+                }
                 setProducts(data);
                 setFiltered(data);
 
@@ -291,7 +294,7 @@ const Dashboard = () => {
             <div className="bg-white/10 pb-5 md:px-[10vw] min-h-[100vh]">
                 <button
                     onClick={handleRemoveFilter}
-                    className={`block md:text-sm text-xs text-white font-semibold md:py-1 py-2 rounded-b-xl px-4 mx-auto bg-[#990000] cursor-pointer hover:bg-[#990000] transition-all ease-in-out duration-300
+                    className={`block md:text-sm text-xs text-white font-semibold md:py-1 py-2 rounded-b-xl px-4 mx-auto bg-[#990000] cursor-pointer hover:bg-[#770000] active:bg-[#770000] transition-all ease-in-out duration-300
                         ${selectedBrand || selectedCategory ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                 >
                     Clear Filters

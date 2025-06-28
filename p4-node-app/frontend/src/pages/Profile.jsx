@@ -37,6 +37,7 @@ function Profile() {
                     credentials: "include",
                 });
                 const productsData = await resProducts.json();
+                productsData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setProducts(productsData);
             } catch (error) {
                 console.error("Error fetching data:", error);

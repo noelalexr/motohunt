@@ -22,6 +22,10 @@ const GuestDashboard = () => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/guest-dashboard`);
                 const data = await response.json();
+                for (let i = data.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [data[i], data[j]] = [data[j], data[i]];
+                }
                 setProducts(data);
                 setFiltered(data);
                 console.log(data);
@@ -68,7 +72,7 @@ const GuestDashboard = () => {
                 <img src="/images/logo/logo-white.png" alt="motohunt-logo" className="md:h-[30px] h-[20px] my-auto" />
             </div>
             <div className="md:flex justify-center gap-2 bg-black/80 text-center text-white text-sm py-2">
-                <p>Please login to access the full features of the app.</p><a href="/login" className="text-blue-500 underline hover:text-blue-400">Back to login</a>
+                <p>Please login to access the full features of the app.</p><a href="/login" className="text-blue-500 underline hover:text-blue-400 active:text-blue-400">Back to login</a>
             </div>
             <div className="bg-gray-100/75 py-3">
                 <div className="relative flex gap-3 justify-center items-center md:w-[75vw] md:mx-auto bg-white rounded-full py-2 px-5 mx-2 border-2 border-white focus-within:bg-[#ffefef] focus-within:border-[#990000] transition-colors duration-300">
@@ -107,12 +111,12 @@ const GuestDashboard = () => {
                                 <img
                                     src={product.image.url.replace("/upload/", "/upload/c_fill,w_1000,h_563/")}
                                     alt={product.name}
-                                    className="md:w-[350px] md:h-[197px] object-cover rounded-t-lg group-hover:scale-110 ease-in-out duration-300"
+                                    className="md:w-[350px] md:h-[197px] object-cover rounded-t-lg group-hover:scale-110 group-active:scale-110 ease-in-out duration-300"
                                 />
                             </div>
-                            <div className="bg-white p-4 rounded-b-lg z-1 group-hover:bg-[#990000] transition-colors duration-300">
-                                <h3 className="text-lg font-bold group-hover:text-white">{product.name}</h3>
-                                <p className="text-sm group-hover:text-white">{formatPeso(product.price)}</p>
+                            <div className="bg-white p-4 rounded-b-lg z-1 group-hover:bg-[#990000] group-active:bg-[#990000] transition-colors duration-300">
+                                <h3 className="text-lg font-bold group-hover:text-white group-active:text-white">{product.name}</h3>
+                                <p className="text-sm group-hover:text-white group-active:text-white">{formatPeso(product.price)}</p>
                             </div>
                         </div>
                     ))}

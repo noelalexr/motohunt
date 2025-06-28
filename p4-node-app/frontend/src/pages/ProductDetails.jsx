@@ -96,7 +96,7 @@ const ProductDetails = () => {
                     <img
                         src={productDetails.image.url.replace("/upload/", "/upload/c_fill,ar_4:3,w_2000/")}
                         alt={productDetails.name}
-                        className="md:w-[40vw] h-full object-cover hover:scale-110 ease-in-out duration-300"
+                        className="md:w-[40vw] h-full object-cover hover:scale-110 active:scale-110 ease-in-out duration-300"
                     />
                     <div onClick={() => navigate(-1)} className="absolute top-5 left-5 bg-[#990000] rounded-full text-white p-3 hover:scale-110 active:bg-[#770000] ease-in-out duration-300 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -115,7 +115,7 @@ const ProductDetails = () => {
                             className="text-xs font-semibold border-2 text-white bg-red-500 border-red-500 w-50 py-1 px-2 rounded-2xl mx-auto mt-5 cursor-pointer transition-colors duration-300"
                         >
                             {wishlistLoading ? (
-                                <div className="animate-spin rounded-full h-6 w-6 border-3 border-white/80 border-b-white/0 mx-auto"></div>
+                                <div className="animate-spin rounded-full h-6 w-6 border-3 border-white/90 border-b-white/0 mx-auto"></div>
                             ) : (
                                 <div className="flex gap-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -134,7 +134,7 @@ const ProductDetails = () => {
                             className="text-xs font-semibold border-2 text-red-500 border-red-500 w-50 py-1 px-2 rounded-2xl mx-auto mt-5 cursor-pointer transition-colors duration-300"
                         >
                             {wishlistLoading ? (
-                                <div className="animate-spin rounded-full h-6 w-6 border-3 border-white/80 border-b-white/0 mx-auto"></div>
+                                <div className="animate-spin rounded-full h-6 w-6 border-3 border-red-500/90 border-b-white/0 mx-auto"></div>
                             ) : (
                                 <div className="flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

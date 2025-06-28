@@ -24,6 +24,7 @@ function Wishlist() {
                     credentials: "include",
                 });
                 const wishlistData = await wishlistResponse.json();
+                wishlistData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setWishlist(wishlistData);
 
             } catch (error) {
