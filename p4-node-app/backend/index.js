@@ -21,7 +21,7 @@ const app = express();
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://motohunt-4wzp.onrender.com" //RENDER FRONT END LIVE SITE
+    process.env.CLIENT_PROD //RENDER FRONT END LIVE SITE
 ];
 
 //DB CONNECTION
